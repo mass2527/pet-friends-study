@@ -1,9 +1,9 @@
-import { InputProps } from 'components/atoms/Input/Input';
+import { ComponentProps } from 'react';
 import Input from 'components/atoms/Input';
 
 import Styled from './styled';
 
-interface InputLabelProps extends InputProps {
+interface InputLabelProps extends ComponentProps<'input'> {
   label: string;
   placeholder?: string;
 }
