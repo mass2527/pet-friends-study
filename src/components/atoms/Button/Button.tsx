@@ -1,8 +1,8 @@
-import { ComponentProps, FunctionComponent } from 'react';
+import { ComponentProps } from 'react';
 
 interface ButtonProps extends ComponentProps<'button'> {}
 
-const Button: FunctionComponent<ButtonProps> = ({ children, type = 'button', ...rest }) => {
+const Button = ({ children, type = 'button', ...rest }: ButtonProps) => {
   return (
     <button type={type} {...rest}>
       {children}
