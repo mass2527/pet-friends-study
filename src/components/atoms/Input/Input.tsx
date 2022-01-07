@@ -1,8 +1,8 @@
-import { ComponentProps, FunctionComponent } from 'react';
+import { ComponentProps } from 'react';
 
 export interface InputProps extends ComponentProps<'input'> {}
 
-const Input: FunctionComponent<InputProps> = (props) => {
+const Input = (props: InputProps) => {
   return <input {...props} />;
 };
 
