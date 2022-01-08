@@ -10,13 +10,11 @@ interface InputLabelProps extends ComponentProps<'input'> {
 
 const InputLabel = ({ label, placeholder, ...rest }: InputLabelProps) => {
   return (
-    <div>
-      <Styled.Label>
-        <span>{label}</span>
-        <Input {...rest} />
-        <Styled.Placeholder>{placeholder}</Styled.Placeholder>
-      </Styled.Label>
-    </div>
+    <Styled.Label>
+      <span>{label}</span>
+      <Input {...rest} />
+      <Styled.Placeholder>{placeholder}</Styled.Placeholder>
+    </Styled.Label>
   );
 };
 
