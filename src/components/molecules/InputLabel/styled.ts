@@ -1,17 +1,30 @@
 import styled from '@emotion/styled';
+import { CSSProperties } from 'react';
 
-const Label = styled.label`
+interface LabelProps {
+  direction: CSSProperties['flexDirection'];
+  alignItems: CSSProperties['alignItems'];
+  placeholder?: string;
+}
+
+const Label = styled.label<LabelProps>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ direction }) => direction};
+  align-items: ${({ alignItems }) => alignItems};
+  gap: 5px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
 
-  span:first-of-type {
-    font-weight: 600;
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    &::after {
+      content: ${({ placeholder }) => placeholder && `'${placeholder}'`};
+      color: #888;
+      font-size: 14px;
+    }
   }
 `;
 
-const Placeholder = styled.span`
-  color: #888;
-  font-size: 14px;
-`;
-
-export default { Label, Placeholder };
+export default { Label };
