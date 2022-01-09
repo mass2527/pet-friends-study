@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import ToDosPage from 'pages/todos/ToDosPage';
-import ToDoPage from 'pages/todos/ToDoPage';
-import IncompleteToDoPage from 'pages/todos/IncompleteToDoPage';
-import CompletedToDoPage from 'pages/todos/CompletedToDoPage';
+import TodosPage from 'pages/todos/TodosPage';
+import TodoPage from 'pages/todos/TodoPage';
+import IncompleteTodoPage from 'pages/todos/IncompleteTodoPage';
+import CompletedTodoPage from 'pages/todos/CompletedTodoPage';
 import NotFoundPage from 'pages/rest/NotFoundPage';
 
 const App = () => {
@@ -11,13 +11,13 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/'>
-          <Route index element={<ToDosPage />} />
+          <Route index element={<TodosPage />} />
         </Route>
         <Route path='todos'>
-          <Route index element={<ToDosPage />} />
-          <Route path=':toDoId' element={<ToDoPage />} />
-          <Route path='incomplete' element={<IncompleteToDoPage />} />
-          <Route path='completed' element={<CompletedToDoPage />} />
+          <Route index element={<TodosPage />} />
+          <Route path=':toDoId' element={<TodoPage />} />
+          <Route path='incomplete' element={<IncompleteTodoPage />} />
+          <Route path='completed' element={<CompletedTodoPage />} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
