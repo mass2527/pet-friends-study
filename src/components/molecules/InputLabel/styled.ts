@@ -11,6 +11,7 @@ const Label = styled.label`
 
 const Placeholder = styled.span`
   color: #888;
+  font-size: 14px;
 `;
 
 export default { Label, Placeholder };

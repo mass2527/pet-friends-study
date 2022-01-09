@@ -4,7 +4,7 @@ import Flex from 'components/atoms/Flex';
 import InputLabel from 'components/molecules/InputLabel';
 import Button from 'components/atoms/Button';
 
-const ToDoForm = () => {
+const TodoForm = () => {
   const [toDo, setToDo] = useState('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -36,4 +36,4 @@ const ToDoForm = () => {
   );
 };
 
-export default ToDoForm;
+export default TodoForm;

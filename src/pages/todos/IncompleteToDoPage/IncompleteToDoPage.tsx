@@ -1,5 +1,5 @@
-const IncompleteToDoPage = () => {
+const IncompleteTodoPage = () => {
   return <div>Incomplete</div>;
 };
 
-export default IncompleteToDoPage;
+export default IncompleteTodoPage;

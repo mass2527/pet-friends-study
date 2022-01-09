@@ -1,7 +1,7 @@
 import Accordion from 'components/atoms/Accordion';
 
-const InCompleteToDos = () => {
-  return <Accordion title='미완료'>inCompleteToDos.map...</Accordion>;
+const InCompleteTodos = () => {
+  return <Accordion title='미완료'>InCompleteTodos.map...</Accordion>;
 };
 
-export default InCompleteToDos;
+export default InCompleteTodos;

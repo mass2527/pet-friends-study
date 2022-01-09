@@ -1,5 +1,5 @@
-const CompletedToDoPage = () => {
+const CompletedTodoPage = () => {
   return <div>completed</div>;
 };
 
-export default CompletedToDoPage;
+export default CompletedTodoPage;
