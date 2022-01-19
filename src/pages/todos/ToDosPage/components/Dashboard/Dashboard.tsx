@@ -1,8 +1,8 @@
 import { useAppSelector } from 'hooks';
-import { TODOS_DOMAIN } from '../../commons/constant';
+import { selectTodos } from 'store/reducers/todos';
 
 const Dashboard = () => {
-  const todos = useAppSelector(({ todos }) => todos[TODOS_DOMAIN].todos);
+  const todos = useAppSelector(selectTodos);
 
   const inCompleteTodos = todos.filter(({ isCompleted }) => !isCompleted);
   const completedTodos = todos.filter(({ isCompleted }) => isCompleted);

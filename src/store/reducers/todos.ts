@@ -1,5 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TODOS_DOMAIN } from 'pages/todos/TodosPage/commons/constant';
+import { RootState } from 'store';
 
 export type Priority = '1' | '2' | '3' | '4' | '5';
 
@@ -72,5 +73,12 @@ export const {
   todoRemoved,
   allTodosIsCompletedSet,
 } = slice.actions;
+
+export const selectTodos = ({ todos }: RootState) => todos[TODOS_DOMAIN].todos;
+
+export const selectTodoById =
+  (id: string) =>
+  ({ todos }: RootState) =>
+    todos[TODOS_DOMAIN].todos.find((todo) => todo.id === id);
 
 export default slice.reducer;

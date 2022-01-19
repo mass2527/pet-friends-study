@@ -1,12 +1,12 @@
 import { useAppSelector } from 'hooks';
 import Accordion from 'components/atoms/Accordion';
-import { TODOS_DOMAIN } from '../../commons/constant';
 import TodoItem from '../TodoItem';
+import { selectTodos } from 'store/reducers/todos';
 
 const CompletedTodos = () => {
-  const todoIds = useAppSelector(({ todos }) =>
-    todos[TODOS_DOMAIN].todos.filter(({ isCompleted }) => isCompleted).map(({ id }) => id)
-  );
+  const todoIds = useAppSelector(selectTodos)
+    .filter(({ isCompleted }) => isCompleted)
+    .map(({ id }) => id);
 
   return (
     <Accordion title='완료'>

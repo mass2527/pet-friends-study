@@ -1,25 +1,27 @@
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { Priority, todoIsCompletedToggled, todoModified, todoRemoved } from 'store/reducers/todos';
+import {
+  Priority,
+  selectTodoById,
+  todoIsCompletedToggled,
+  todoModified,
+  todoRemoved,
+} from 'store/reducers/todos';
 
 import Flex from 'components/atoms/Flex';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import RadioGroup from 'components/molecules/RadioGroup';
 
-import { PRIORITY_IMOJIES, PRIORITY_OPTIONS, TODOS_DOMAIN } from '../../commons/constant';
+import { PRIORITY_IMOJIES, PRIORITY_OPTIONS } from '../../commons/constant';
 
 interface TodoItem {
   id: string;
 }
 
 const TodoItem = ({ id }: TodoItem) => {
-  const {
-    isCompleted,
-    priority: initialPriority,
-    text,
-  } = useAppSelector(({ todos }) => todos[TODOS_DOMAIN].todos.find((todo) => todo.id === id))!;
+  const { isCompleted, priority: initialPriority, text } = useAppSelector(selectTodoById(id))!;
   const [priority, setPriority] = useState(initialPriority);
   const [isEditMode, setIsEditMode] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

@@ -6,6 +6,7 @@ import InCompleteTodos from './components/InCompleteTodos';
 import CompletedTodos from './components/CompletedTodos';
 import Dashboard from './components/Dashboard';
 import Actions from './components/Actions';
+import Filter from './components/Filter';
 
 const TodosPage = () => {
   return (
@@ -21,6 +22,7 @@ const TodosPage = () => {
           <Flex spacing={2}>
             <Actions />
             <Dashboard />
+            <Filter />
           </Flex>
         </Flex>
       }
