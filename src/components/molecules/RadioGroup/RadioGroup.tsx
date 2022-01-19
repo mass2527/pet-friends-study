@@ -8,8 +8,8 @@ export interface Option {
 }
 
 interface RadioGroupProps {
-  label: string;
-  options: Option[];
+  label?: string;
+  options: ReadonlyArray<Option>;
   name: string;
   checked: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

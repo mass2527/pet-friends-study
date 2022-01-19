@@ -1,11 +1,10 @@
-import { ReactElement } from 'react';
 import Styled from './styled';
 
 interface BasicTemplateProps {
-  header?: ReactElement;
-  aside?: ReactElement;
-  main: ReactElement;
-  footer?: ReactElement;
+  header?: JSX.Element;
+  aside?: JSX.Element;
+  main: JSX.Element;
+  footer?: JSX.Element;
 }
 
 const BasicTemplate = ({ header, aside, main, footer }: BasicTemplateProps) => {

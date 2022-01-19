@@ -1,8 +1,7 @@
 import { ComponentProps, CSSProperties } from 'react';
-import Input from 'components/atoms/Input';
 
 import Styled from './styled';
-import Flex from 'components/atoms/Flex';
+import { forwardRef } from 'react';
 
 interface InputLabelProps extends ComponentProps<'input'> {
   label: string;
@@ -11,25 +10,15 @@ interface InputLabelProps extends ComponentProps<'input'> {
   alignItems?: CSSProperties['alignItems'];
 }
 
-const InputLabel = ({
-  label,
-  placeholder,
-  className,
-  direction = 'column',
-  alignItems = 'flex-start',
-  ...rest
-}: InputLabelProps) => {
-  return (
-    <Styled.Label
-      direction={direction}
-      alignItems={alignItems}
-      className={className}
-      placeholder={placeholder}
-    >
-      <div>{label}</div>
-      <Input {...rest} />
-    </Styled.Label>
-  );
-};
+const InputLabel = forwardRef<HTMLInputElement, InputLabelProps>(
+  ({ label, placeholder, direction = 'column', alignItems = 'flex-start', ...rest }, ref) => {
+    return (
+      <Styled.Label direction={direction} alignItems={alignItems} placeholder={placeholder}>
+        <div>{label}</div>
+        <input ref={ref} {...rest} />
+      </Styled.Label>
+    );
+  }
+);
 
 export default InputLabel;

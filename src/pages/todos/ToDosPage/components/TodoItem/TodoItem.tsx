@@ -1,32 +1,88 @@
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { Priority, todoIsCompletedToggled, todoModified, todoRemoved } from 'store/reducers/todos';
+
+import Flex from 'components/atoms/Flex';
 import Input from 'components/atoms/Input';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/reducers';
-import { todoCompleted } from 'store/reducers/todos';
-import { TODOS_DOMAIN } from '../../commons/constant';
+import Button from 'components/atoms/Button';
+import RadioGroup from 'components/molecules/RadioGroup';
+
+import { PRIORITY_IMOJIES, PRIORITY_OPTIONS, TODOS_DOMAIN } from '../../commons/constant';
 
 interface TodoItem {
   id: string;
 }
 
 const TodoItem = ({ id }: TodoItem) => {
-  const todo = useSelector(({ todos }: RootState) =>
-    todos[TODOS_DOMAIN].todos.find((todo) => todo.id === id)
-  );
-  const dispatch = useDispatch();
+  const {
+    isCompleted,
+    priority: initialPriority,
+    text,
+  } = useAppSelector(({ todos }) => todos[TODOS_DOMAIN].todos.find((todo) => todo.id === id))!;
+  const [priority, setPriority] = useState(initialPriority);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
-  const handleTodoCompleted = () => dispatch(todoCompleted(id));
+  const previousPriority = useMemo(() => priority, [isEditMode]);
+
+  useEffect(() => {
+    if (isEditMode) {
+      inputRef.current?.focus();
+    }
+  }, [isEditMode]);
+
+  const toggleTodoIsCompleted = () => dispatch(todoIsCompletedToggled(id));
+
+  const handleCancelClick = () => {
+    setPriority(previousPriority);
+    setIsEditMode(!isEditMode);
+  };
+
+  const handleModifyClick = () => setIsEditMode(!isEditMode);
+
+  const handleSave = () => {
+    dispatch(todoModified({ id, text: inputRef.current?.value as string }));
+    setIsEditMode(false);
+  };
+
+  const handlePriorityChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setPriority(e.target.value as Priority);
+
+  const handleRemoveClick = () => {
+    const isAllowed = window.confirm(`정말 제거할까요?!`);
+    if (isAllowed) {
+      dispatch(todoRemoved(id));
+    }
+  };
 
   return (
-    <div>
-      <p>{todo?.text}</p>
-      <img
-        src='https://pet-friends.atlassian.net/images/icons/priorities/medium.svg'
-        alt='medium priority'
-        width='16px'
-        height='16px'
-      />
-      <Input type='checkbox' checked={todo?.isCompleted} onChange={handleTodoCompleted} />
-    </div>
+    <li>
+      {isEditMode ? (
+        <form onSubmit={handleSave}>
+          <Flex>
+            <RadioGroup
+              name='priority'
+              options={PRIORITY_OPTIONS}
+              checked={priority}
+              onChange={handlePriorityChange}
+            />
+            <Input minLength={4} defaultValue={text} autoComplete='off' ref={inputRef} required />
+            <Button type='submit'>저장</Button>
+            <Button onClick={handleCancelClick}>취소</Button>
+          </Flex>
+        </form>
+      ) : (
+        <>
+          <Input type='checkbox' checked={isCompleted} onChange={toggleTodoIsCompleted} />
+          <span>{PRIORITY_IMOJIES[priority]}</span>
+          <span>{text}</span>
+          <Button onClick={handleModifyClick}>수정</Button>
+          <Button onClick={handleRemoveClick}>제거</Button>
+        </>
+      )}
+    </li>
   );
 };
 

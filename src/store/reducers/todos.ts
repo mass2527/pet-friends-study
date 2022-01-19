@@ -1,7 +1,7 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TODOS_DOMAIN } from 'pages/todos/TodosPage/commons/constant';
 
-export type Priority = '매우 높음' | '높음' | '보통' | '낮음' | '매우 낮음';
+export type Priority = '1' | '2' | '3' | '4' | '5';
 
 export interface TodoState {
   id: string;
@@ -40,13 +40,24 @@ const slice = createSlice({
       state[TODOS_DOMAIN].todos.push(addedTodo);
     },
 
-    todoCompleted(state, { payload }: PayloadAction<string>) {
-      const completedTodoIndex = state[TODOS_DOMAIN].todos.findIndex((todo) => todo.id === payload);
-      state[TODOS_DOMAIN].todos[completedTodoIndex].isCompleted = true;
+    todoIsCompletedToggled(state, { payload }: PayloadAction<string>) {
+      const selectedIndex = state[TODOS_DOMAIN].todos.findIndex((todo) => todo.id === payload);
+      state[TODOS_DOMAIN].todos[selectedIndex].isCompleted =
+        !state[TODOS_DOMAIN].todos[selectedIndex].isCompleted;
+    },
+
+    todoModified(state, { payload: { id, text } }: PayloadAction<{ id: string; text: string }>) {
+      const selectedIndex = state[TODOS_DOMAIN].todos.findIndex((todo) => todo.id === id);
+      state[TODOS_DOMAIN].todos[selectedIndex].text = text;
+    },
+
+    todoRemoved(state, { payload }: PayloadAction<string>) {
+      const selectedIndex = state[TODOS_DOMAIN].todos.findIndex((todo) => todo.id === payload);
+      state[TODOS_DOMAIN].todos.splice(selectedIndex, 1);
     },
   },
 });
 
-export const { todoAdded, todoCompleted } = slice.actions;
+export const { todoAdded, todoIsCompletedToggled, todoModified, todoRemoved } = slice.actions;
 
 export default slice.reducer;

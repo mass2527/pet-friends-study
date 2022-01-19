@@ -1,9 +1,9 @@
-import { CSSProperties, ReactElement } from 'react';
+import { CSSProperties } from 'react';
 
 import Styled from './styled';
 
 export interface FlexProps {
-  children: ReactElement[];
+  children: (JSX.Element | null | boolean)[];
   spacing?: number;
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];

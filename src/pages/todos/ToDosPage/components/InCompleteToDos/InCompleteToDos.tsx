@@ -1,21 +1,22 @@
 import Accordion from 'components/atoms/Accordion';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/reducers';
+import Flex from 'components/atoms/Flex';
+import { useAppSelector } from 'hooks';
+
 import { TODOS_DOMAIN } from '../../commons/constant';
 import TodoItem from '../TodoItem';
 
 const InCompleteTodos = () => {
-  const todoIds = useSelector(({ todos }: RootState) =>
+  const todoIds = useAppSelector(({ todos }) =>
     todos[TODOS_DOMAIN].todos.filter(({ isCompleted }) => !isCompleted).map(({ id }) => id)
   );
 
   return (
     <Accordion title='미완료'>
-      <div>
+      <ul>
         {todoIds.map((todoId) => (
           <TodoItem key={todoId} id={todoId} />
         ))}
-      </div>
+      </ul>
     </Accordion>
   );
 };

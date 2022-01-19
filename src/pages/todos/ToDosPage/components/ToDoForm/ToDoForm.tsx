@@ -1,12 +1,11 @@
-import { useState, FormEvent, ChangeEvent, Dispatch } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Flex from 'components/atoms/Flex';
 import InputLabel from 'components/molecules/InputLabel';
-import Button from 'components/atoms/Button';
 import { todoAdded } from 'store/reducers/todos';
 import RadioGroup from 'components/molecules/RadioGroup';
-import { INITIAL_TODO_FORM, PRIORITY_OPTIONS } from '../../commons/constant';
+import { INITIAL_TODO_FORM, PRIORITY_OPTIONS, TODO_OPTIONS } from '../../commons/constant';
 
 const TodoForm = () => {
   const [todoForm, setTodoForm] = useState(INITIAL_TODO_FORM);
@@ -32,19 +31,22 @@ const TodoForm = () => {
           checked={todoForm.priority}
           onChange={handleTodoFormChange}
         />
-        <Flex alignItems='flex-end'>
-          <InputLabel
-            name='text'
-            label='오늘 할 일'
-            placeholder='4글자 이상'
-            minLength={4}
-            value={todoForm.text}
-            onChange={handleTodoFormChange}
-            required
-          />
-
-          <Button type='submit'>추가</Button>
-        </Flex>
+        <InputLabel
+          name='text'
+          label='오늘 할 일'
+          placeholder='4글자 이상'
+          minLength={4}
+          value={todoForm.text}
+          onChange={handleTodoFormChange}
+          autoComplete='off'
+          list='todo-options'
+          required
+        />
+        <datalist id='todo-options'>
+          {TODO_OPTIONS.map(({ value }) => (
+            <option value={value} />
+          ))}
+        </datalist>
       </Flex>
     </form>
   );
