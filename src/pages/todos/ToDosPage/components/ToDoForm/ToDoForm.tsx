@@ -44,7 +44,7 @@ const TodoForm = () => {
         />
         <datalist id='todo-options'>
           {TODO_OPTIONS.map(({ value }) => (
-            <option value={value} />
+            <option key={value} value={value} />
           ))}
         </datalist>
       </Flex>

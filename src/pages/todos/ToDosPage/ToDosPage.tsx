@@ -1,9 +1,10 @@
 import Flex from 'components/atoms/Flex';
-import TodoForm from './components/TodoForm';
+import BasicTemplate from 'components/templates/BasicTemplate';
 
+import TodoForm from './components/TodoForm';
 import InCompleteTodos from './components/InCompleteTodos';
 import CompletedTodos from './components/CompletedTodos';
-import BasicTemplate from 'components/templates/BasicTemplate';
+import Dashboard from './components/Dashboard';
 
 const TodosPage = () => {
   return (
@@ -16,6 +17,7 @@ const TodosPage = () => {
             <InCompleteTodos />
             <CompletedTodos />
           </Flex>
+          <Dashboard />
         </Flex>
       }
       footer={<p>Made by philly</p>}
