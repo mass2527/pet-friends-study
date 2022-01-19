@@ -55,9 +55,22 @@ const slice = createSlice({
       const selectedIndex = state[TODOS_DOMAIN].todos.findIndex((todo) => todo.id === payload);
       state[TODOS_DOMAIN].todos.splice(selectedIndex, 1);
     },
+
+    allTodosIsCompletedSet(state, { payload }: PayloadAction<boolean>) {
+      state[TODOS_DOMAIN].todos = state[TODOS_DOMAIN].todos.map((todo) => ({
+        ...todo,
+        isCompleted: payload,
+      }));
+    },
   },
 });
 
-export const { todoAdded, todoIsCompletedToggled, todoModified, todoRemoved } = slice.actions;
+export const {
+  todoAdded,
+  todoIsCompletedToggled,
+  todoModified,
+  todoRemoved,
+  allTodosIsCompletedSet,
+} = slice.actions;
 
 export default slice.reducer;

@@ -1,5 +1,4 @@
 import Accordion from 'components/atoms/Accordion';
-import Flex from 'components/atoms/Flex';
 import { useAppSelector } from 'hooks';
 
 import { TODOS_DOMAIN } from '../../commons/constant';

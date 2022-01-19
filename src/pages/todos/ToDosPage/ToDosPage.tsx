@@ -5,6 +5,7 @@ import TodoForm from './components/TodoForm';
 import InCompleteTodos from './components/InCompleteTodos';
 import CompletedTodos from './components/CompletedTodos';
 import Dashboard from './components/Dashboard';
+import Actions from './components/Actions';
 
 const TodosPage = () => {
   return (
@@ -17,7 +18,10 @@ const TodosPage = () => {
             <InCompleteTodos />
             <CompletedTodos />
           </Flex>
-          <Dashboard />
+          <Flex spacing={2}>
+            <Actions />
+            <Dashboard />
+          </Flex>
         </Flex>
       }
       footer={<p>Made by philly</p>}
