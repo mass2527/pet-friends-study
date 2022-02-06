@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import TodosPage from 'pages/todos/TodosPage';
 import TodoPage from 'pages/todos/TodoPage';
@@ -10,9 +10,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'>
-          <Route index element={<TodosPage />} />
-        </Route>
+        <Route path='/' element={<Navigate replace to='/todos' />} />
+
         <Route path='todos'>
           <Route index element={<TodosPage />} />
           <Route path=':toDoId' element={<TodoPage />} />

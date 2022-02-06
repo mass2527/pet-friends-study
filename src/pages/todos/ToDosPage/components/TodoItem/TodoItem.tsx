@@ -27,8 +27,6 @@ const TodoItem = ({ id }: TodoItem) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 
-  const previousPriority = useMemo(() => priority, [isEditMode]);
-
   useEffect(() => {
     if (isEditMode) {
       inputRef.current?.focus();
@@ -38,7 +36,7 @@ const TodoItem = ({ id }: TodoItem) => {
   const toggleTodoIsCompleted = () => dispatch(todoIsCompletedToggled(id));
 
   const handleCancelClick = () => {
-    setPriority(previousPriority);
+    setPriority(initialPriority);
     setIsEditMode(!isEditMode);
   };
 
